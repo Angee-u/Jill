@@ -50,21 +50,30 @@ API externa - Spotify Web API
 
 ---
 
-## API REST (resumo)
+# Resumo da API REST — JILL-11.BAR
 
-POST `/api/auth/register` - Cadastro 
-POST `/api/auth/login` - Login 
-GET `/api/posts` - Feed público (paginado) 
-GET `/api/posts/mine` - JWT - Posts do usuário logado 
-GET `/api/posts/:id` - opcional - Post por ID 
-POST `/api/posts` - JWT - Criar post 
-PUT `/api/posts/:id` - JWT - Editar post 
-DELETE `/api/posts/:id` - JWT - Deletar post 
-GET `/api/posts/:id/comments` - Listar comentários 
-POST `/api/posts/:id/comments` - JWT - Criar comentário 
-PUT `/api/posts/:id/comments/:id` - JWT - Editar comentário 
-DELETE `/api/posts/:id/comments/:id` - JWT - Deletar comentário 
-GET `/api/spotify/search?q=` - JWT - Buscar músicas 
+Abaixo estão os endpoints organizados para referência do projeto. Rotas marcadas como **JWT** exigem autenticação.
+
+## Autenticação
+- `POST /api/auth/register` — Cadastro de novo usuário.
+- `POST /api/auth/login` — Autenticação de usuário e obtenção de token.
+
+## Posts
+- `GET /api/posts` — Feed público (paginado).
+- `GET /api/posts/mine` — (**JWT**) Listar posts do usuário autenticado.
+- `GET /api/posts/:id` — (Opcional) Detalhes de um post por ID.
+- `POST /api/posts` — (**JWT**) Criar um novo post.
+- `PUT /api/posts/:id` — (**JWT**) Editar um post existente.
+- `DELETE /api/posts/:id` — (**JWT**) Deletar um post.
+
+## Comentários
+- `GET /api/posts/:id/comments` — Listar comentários de um post.
+- `POST /api/posts/:id/comments` — (**JWT**) Adicionar um comentário a um post.
+- `PUT /api/posts/:id/comments/:id` — (**JWT**) Editar um comentário próprio.
+- `DELETE /api/posts/:id/comments/:id` — (**JWT**) Remover um comentário.
+
+## Spotify
+- `GET /api/spotify/search?q=` — (**JWT**) Buscar músicas no Spotify.
 
 ---
 

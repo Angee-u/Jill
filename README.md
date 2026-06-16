@@ -52,9 +52,9 @@ API externa - Spotify Web API
 
 ## API REST (resumo)
 
-POST `/api/auth/register` —Cadastro 
-POST `/api/auth/login`— Login 
-GET `/api/posts` — Feed público (paginado) 
+POST `/api/auth/register` - Cadastro 
+POST `/api/auth/login` - Login 
+GET `/api/posts` - Feed público (paginado) 
 GET `/api/posts/mine` - JWT - Posts do usuário logado 
 GET `/api/posts/:id` - opcional - Post por ID 
 POST `/api/posts` - JWT - Criar post 

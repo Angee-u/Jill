@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JILL-11.BAR — Sobre</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/sobre.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">JILL-11<span>.BAR</span></div>
+        <nav class="main-nav">
+          <a href="/home.html" class="nav-link">home</a>
+          <a href="/sobre.html" class="nav-link active">sobre</a>
+          <a href="/contato.html" class="nav-link">contato</a>
+        </nav>
+        <div class="header-right">
+          <a href="/login.html" class="header-user" id="header-auth"
+            >[ entrar ]</a
+          >
+        </div>
+      </header>
+
+      <main class="sobre-layout">
+        <section class="sobre-hero">
+          <p class="sobre-eyebrow">// sobre o bar</p>
+          <h1 class="sobre-title">JILL-11<span>.BAR</span></h1>
+          <p class="sobre-quote">
+            "Todo mundo que vem aqui tem uma história. Eu só fico aqui atrás
+            servindo drinks e ouvindo."
+          </p>
+        </section>
+
+        <section class="sobre-cards">
+          <div
+            class="sobre-card"
+            style="border-top-color: var(--va-neon-purple)"
+          >
+            <p class="sobre-card-title">// o que é isso</p>
+            <p class="sobre-card-text">
+              Um blog coletivo inspirado no universo de VA-11 Hall-A. Um lugar
+              pra escrever sobre o dia a dia, tecnologia, arte e tudo que não
+              cabe em outras redes. Sem algoritmo. Ordem cronológica.
+            </p>
+          </div>
+
+          <div class="sobre-card" style="border-top-color: var(--va-neon-pink)">
+            <p class="sobre-card-title">// como funciona</p>
+            <p class="sobre-card-text">
+              Crie uma conta, escreva seus posts e opcionalmente adicione uma
+              trilha sonora do Spotify. Outros usuários podem ler e comentar.
+              Simples assim.
+            </p>
+          </div>
+
+          <div class="sobre-card" style="border-top-color: var(--va-neon-teal)">
+            <p class="sobre-card-title">// stack</p>
+            <p class="sobre-card-text">
+              Frontend em HTML, CSS e JS puro.<br />
+              Backend em Node.js com Express.<br />
+              Banco de dados MySQL.<br />
+              Música via Spotify Web API.
+            </p>
+          </div>
+
+          <div
+            class="sobre-card"
+            style="border-top-color: var(--va-neon-amber)"
+          >
+            <p class="sobre-card-title">// inspiração</p>
+            <p class="sobre-card-text">
+              VA-11 Hall-A: Cyberpunk Bartender Action (Sukeban Games, 2016).
+              Blogs pessoais dos anos 2000. Diários de madrugada. A vontade de
+              ter um lugar só nosso na internet.
+            </p>
+          </div>
+        </section>
+
+        <!-- CRÉDITOS -->
+        <section class="sobre-credits">
+          <p class="section-title">// feito por</p>
+          <div class="credits-card">
+            <div
+              class="author-avatar"
+              style="width: 4rem; height: 4rem; font-size: 0.6rem"
+            >
+              AN
+            </div>
+            <div>
+              <p class="credits-name">Angee</p>
+              <p class="credits-desc">
+                estudante de ADS · desenvolvedor frontend · fã do VA-11
+              </p>
+              <a
+                href="/contato.html"
+                class="va-btn-link"
+                style="margin-top: 8px; display: inline-block"
+                >falar comigo &gt;</a
+              >
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span>Play VA-11 Hall-A</span>
+        <div class="footer-links">
+          <a href="/home.html" class="footer-link">home</a>
+          <a href="/contato.html" class="footer-link">contato</a>
+        </div>
+        <span>Made by Angee</span>
+      </footer>
+    </div>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

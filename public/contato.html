@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JILL-11.BAR — Contato</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/contato.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page">
+
+      <header>
+        <div class="logo">JILL-11<span>.BAR</span></div>
+        <nav class="main-nav">
+          <a href="/home.html"    class="nav-link">home</a>
+          <a href="/sobre.html"   class="nav-link">sobre</a>
+          <a href="/contato.html" class="nav-link active">contato</a>
+        </nav>
+        <div class="header-right">
+          <a href="/login.html" class="header-user" id="header-auth">[ entrar ]</a>
+        </div>
+      </header>
+
+      <main class="contato-layout">
+
+        <div class="contato-main">
+          <p class="contato-eyebrow">// falar com a gente</p>
+          <h1 class="contato-title">Contato</h1>
+          <p class="contato-sub">
+            Tem alguma sugestão, bug pra reportar ou só quer dizer oi?
+            Manda mensagem.
+          </p>
+
+          <form id="contato-form" class="contato-form">
+            <div class="va-input-group">
+              <label for="contato-nome" class="va-label">seu apelido</label>
+              <input type="text" id="contato-nome" class="va-input" placeholder="como te chamam..." required />
+            </div>
+
+            <div class="va-input-group">
+              <label for="contato-email" class="va-label">e-mail</label>
+              <input type="email" id="contato-email" class="va-input" placeholder="para respondermos..." required />
+            </div>
+
+            <div class="va-input-group">
+              <label for="contato-assunto" class="va-label">assunto</label>
+              <input type="text" id="contato-assunto" class="va-input" placeholder="sobre o que é?" required />
+            </div>
+
+            <div class="va-input-group">
+              <label for="contato-msg" class="va-label">mensagem</label>
+              <textarea id="contato-msg" class="va-input" rows="6" placeholder="escreve aqui..." required></textarea>
+            </div>
+
+            <p class="va-error"   id="contato-error"></p>
+            <p class="va-success" id="contato-success"></p>
+
+            <button type="submit" class="va-btn full">enviar &gt;</button>
+          </form>
+        </div>
+
+        <aside class="contato-sidebar">
+          <div class="sidebar-section">
+            <p class="sidebar-title">// onde nos achar</p>
+            <ul class="contato-info">
+              <li>
+                <span class="info-label">local</span>
+                <span class="info-val">Glitch City, online</span>
+              </li>
+              <li>
+                <span class="info-label">horário</span>
+                <span class="info-val">sempre aberto<br />(como o bar)</span>
+              </li>
+              <li>
+                <span class="info-label">resposta</span>
+                <span class="info-val">quando pudermos</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-section">
+            <p class="sidebar-title">// tocando agora</p>
+            <div class="spotify-bar">
+              <span class="spotify-dot"></span>
+              <span class="spotify-track">Alien Shooter — Kira &amp; Dana</span>
+            </div>
+          </div>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-section">
+            <p class="sidebar-title">// links</p>
+            <a href="/sobre.html"  class="sidebar-link">sobre o projeto</a>
+            <a href="/home.html"   class="sidebar-link">voltar ao feed</a>
+            <a href="/login.html"  class="sidebar-link">entrar / cadastrar</a>
+          </div>
+        </aside>
+
+      </main>
+
+      <footer>
+        <span>Play VA-11 Hall-A</span>
+        <div class="footer-links">
+          <a href="/home.html"  class="footer-link">home</a>
+          <a href="/sobre.html" class="footer-link">sobre</a>
+        </div>
+        <span>Made by Angee</span>
+      </footer>
+
+    </div>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

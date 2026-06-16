@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGIN</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">JILL-11<span>.BAR</span></div>
+
+        <div class="acesso-restrito">// Only ><span>18y</span>></div>
+      </header>
+
+      <div class="login-wrap">
+        <div class="login-box">
+          <div class="login-title">
+            Relax with
+            <br />
+            JILL
+          </div>
+
+          <div class="login-subtitle">
+            "Seja bem-vindo(a). O que vai ser hoje?"
+          </div>
+
+          <div class="login-or-signUp">
+            <div class="btn-logsig active">entrar</div>
+            <div class="btn-logsig">cadastrar</div>
+          </div>
+
+          <form id="va-login-form" class="va-form">
+            <div class="va-input-group">
+              <label for="username" class="va-label"> identificação </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="va-input"
+                placeholder="seu nome.."
+              />
+            </div>
+
+            <div class="va-input-group">
+              <label for="password" class="va-label"> senha </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="va-input"
+                placeholder="*******"
+              />
+            </div>
+
+            <div class="va-forget-group">
+              <label class="va-remeber">
+                <input type="checkbox" id="remember" />
+                <span>Lembrar de mim</span>
+              </label>
+
+              <a href="#" class="va-forgotPassword">esqueceu?</a>
+            </div>
+
+            <button type="submit" class="va-btn">entrar ></button>
+          </form>
+
+          <!-- Form do cadastro - trocar usando css -->
+          <form id="va-signUp-form" class="va-form hide">
+            <div class="va-input-group">
+              <label for="new-username" class="va-label"> apelido</label>
+              <input
+                type="text"
+                id="new-username"
+                name="username"
+                class="va-input"
+                placeholder="como te chamam.."
+                required
+              />
+            </div>
+
+            <div class="va-input-group">
+              <label for="new-password" class="va-label"> senha</label>
+              <input
+                type="password"
+                id="new-password"
+                name="password"
+                class="va-input"
+                placeholder="mín. 6 caracteres"
+                required
+              />
+            </div>
+
+            <div class="va-input-group">
+              <label for="new-email" class="va-label"> e-mail</label>
+              <input
+                type="email"
+                id="new-email"
+                name="email"
+                class="va-input"
+                placeholder="jill-valentine@VA-11.com"
+                required
+              />
+            </div>
+
+            <button type="submit" class="va-btn">criar conta</button>
+          </form>
+        </div>
+      </div>
+
+      <footer>
+        <span>Play VA-11</span>
+        <span> Made by Angee</span>
+      </footer>
+    </div>
+    <script src="./js/login.js"></script>
+  </body>
+</html>

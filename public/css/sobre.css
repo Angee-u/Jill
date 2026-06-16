@@ -1,0 +1,103 @@
+/* DEPENDE DO STYLE.CSS */
+
+.sobre-layout {
+  flex: 1;
+  padding: 2.4rem 3rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* HERO */
+.sobre-hero {
+  margin-bottom: 3rem;
+  border-left: 3px solid var(--va-neon-pink);
+  padding-left: 1.6rem;
+}
+
+.sobre-eyebrow {
+  font-family: var(--font-interface);
+  font-size: 1.4rem;
+  color: var(--va-neon-teal);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.6rem;
+}
+
+.sobre-title {
+  font-family: var(--font-logo);
+  font-size: 1.2rem;
+  color: var(--va-retro-cream);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.sobre-title span {
+  color: var(--va-neon-pink);
+}
+
+.sobre-quote {
+  font-size: 1.3rem;
+  color: var(--va-text-muted);
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 50rem;
+}
+
+/* CARDS */
+.sobre-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.sobre-card {
+  background: var(--va-bg-main);
+  border: 1px solid var(--va-bg-rain);
+  border-top: 2px solid var(--va-neon-purple);
+  padding: 1.4rem;
+}
+
+.sobre-card-title {
+  font-family: var(--font-interface);
+  font-size: 1.5rem;
+  color: var(--va-neon-amber);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.sobre-card-text {
+  font-size: 1.2rem;
+  color: var(--va-text-muted);
+  line-height: 1.7;
+}
+
+/* ── CRÉDITOS ── */
+.sobre-credits {
+  margin-bottom: 2rem;
+}
+
+.credits-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+  background: var(--va-bg-main);
+  border: 1px solid var(--va-bg-rain);
+  border-left: 3px solid var(--va-neon-teal);
+  padding: 1.4rem;
+  margin-top: 1rem;
+}
+
+.credits-name {
+  font-family: var(--font-interface);
+  font-size: 1.8rem;
+  color: var(--va-retro-cream);
+  margin-bottom: 4px;
+}
+
+.credits-desc {
+  font-size: 1.1rem;
+  color: var(--va-text-muted);
+  font-style: italic;
+  line-height: 1.6;
+}

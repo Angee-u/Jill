@@ -1,0 +1,139 @@
+/* DEPENDE DO STYLE.CSS */
+
+.main-form-content {
+  flex: 1;
+  padding: 0 2rem;
+}
+
+.form-container {
+  max-width: 680px;
+  margin: 4rem auto;
+  padding: 2.4rem;
+  background: var(--va-bg-main);
+  border: 1px solid var(--va-bg-rain);
+  border-left: 3px solid var(--va-neon-pink);
+}
+
+.form-title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.2rem;
+  color: var(--va-neon-pink);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+.va-group {
+  margin-bottom: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.va-group label {
+  font-family: var(--font-interface);
+  font-size: 1.2rem;
+  color: var(--va-text-muted);
+}
+
+.va-input,
+.va-select {
+  width: 100%;
+  background: #090514;
+  border: 1px solid var(--va-bg-rain);
+  color: var(--va-text-main);
+  font-family: "Courier Prime", monospace;
+  padding: 12px;
+  font-size: 1.4rem;
+  border-radius: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.va-input:focus,
+.va-select:focus {
+  border-color: var(--va-neon-teal);
+}
+
+.va-select option {
+  background: #090514;
+  color: var(--va-text-main);
+}
+
+.va-error {
+  color: var(--va-neon-pink);
+  font-family: var(--font-interface);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  min-height: 20px;
+  font-style: italic;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2.5rem;
+}
+
+/* Busca do Spotify */
+.spotify-search-box {
+  display: flex;
+  gap: 10px;
+}
+
+.spotify-search-box .va-input {
+  flex: 1;
+}
+
+.spotify-results-list {
+  margin-top: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #06030d;
+  border: 1px solid var(--va-bg-rain);
+}
+
+/* Card de cada música encontrada */
+.spotify-track-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spotify-track-card:hover {
+  background: var(--va-bg-rain);
+}
+
+.spotify-track-card.selected {
+  border-left: 3px solid var(--va-neon-teal);
+  background: rgba(0, 255, 204, 0.05);
+}
+
+.spotify-track-cover {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spotify-track-info {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-interface);
+}
+
+.spotify-track-name {
+  font-size: 1.3rem;
+  color: var(--va-retro-cream);
+}
+
+.spotify-track-artist {
+  font-size: 1.1rem;
+  color: var(--va-text-muted);
+}

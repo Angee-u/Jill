@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JILL-11.BAR</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">JILL-11<span>.BAR</span></div>
+        <nav class="main-nav">
+          <a href="/home.html" class="nav-link active">home</a>
+          <a href="/sobre.html" class="nav-link">sobre</a>
+          <a href="/contato.html" class="nav-link">contato</a>
+        </nav>
+        <div class="header-right">
+          <a href="/login.html" class="header-user" id="header-auth"
+            >[ entrar ]</a
+          >
+          <button
+            id="btn-logout"
+            style="
+              display: block;
+              background: none;
+              border: none;
+              color: #ff3366;
+              cursor: pointer;
+            "
+          >
+            [ sair ]
+          </button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-weather">
+          <span class="weather-city">Glitch City</span>
+          <span class="weather-sep">·</span>
+          <span class="weather-status">chuva · 18°C</span>
+        </div>
+
+        <div class="hero-content">
+          <p class="hero-eyebrow">// glitch city bulletin board</p>
+          <h1 class="hero-title">JILL-11<span>.BAR</span></h1>
+          <p class="hero-sub">
+            "Todo mundo que vem aqui tem uma história.<br />Eu só fico aqui
+            atrás servindo drinks e ouvindo."
+          </p>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number" id="stat-posts">--</span>
+              <span class="stat-label">posts</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" id="stat-users">--</span>
+              <span class="stat-label">autores</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">24/7</span>
+              <span class="stat-label">online</span>
+            </div>
+          </div>
+
+          <a href="#feed" class="va-btn-link">ler os logs &gt;</a>
+        </div>
+
+        <div class="hero-panel">
+          <p class="panel-title">* JILL-11 *</p>
+          <p class="panel-sub">EST. 2031</p>
+          <div class="panel-divider"></div>
+          <p class="panel-label">// drink do dia</p>
+          <p class="panel-value">White Knight</p>
+          <p class="panel-drink-sub">vodka + licor de creme</p>
+        </div>
+      </section>
+
+      <main class="main-layout">
+        <aside class="sidebar">
+          <div class="sidebar-section">
+            <p class="sidebar-title">// categorias</p>
+            <ul class="sidebar-list" id="sidebar-categories">
+              <li>
+                <a href="#" class="sidebar-link active" data-category=""
+                  >todos os posts</a
+                >
+              </li>
+              <li>
+                <a href="#" class="sidebar-link" data-category="dia-a-dia"
+                  >dia a dia</a
+                >
+              </li>
+              <li>
+                <a href="#" class="sidebar-link" data-category="tecnologia"
+                  >tecnologia</a
+                >
+              </li>
+              <li>
+                <a href="#" class="sidebar-link" data-category="off-topic"
+                  >off-topic</a
+                >
+              </li>
+              <li>
+                <a href="#" class="sidebar-link" data-category="arte"
+                  >arte &amp; música</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-section">
+            <p class="sidebar-title">// drink do dia</p>
+            <div class="drink-card">
+              <p class="drink-name">White Knight</p>
+              <p class="drink-desc">
+                vodka + licor de creme<br />p/ noites longas
+              </p>
+            </div>
+            <div class="drink-card">
+              <p class="drink-name">Frothy Water</p>
+              <p class="drink-desc">sem álcool<br />p/ dirigir depois</p>
+            </div>
+          </div>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-section">
+            <p class="sidebar-title">// status</p>
+            <ul class="sidebar-status">
+              <li><span class="status-dot green"></span>bar: aberto</li>
+              <li><span class="status-dot green"></span>jill: online</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="feed" id="feed">
+          <div class="feed-header">
+            <p class="section-title">// posts recentes</p>
+            <div class="feed-filters">
+              <button class="va-btn filter-btn active" data-category="">
+                todos
+              </button>
+              <button class="va-btn filter-btn" data-category="dia-a-dia">
+                dia-a-dia
+              </button>
+              <button class="va-btn filter-btn" data-category="tecnologia">
+                tech
+              </button>
+              <button class="va-btn filter-btn" data-category="arte">
+                arte
+              </button>
+            </div>
+          </div>
+
+          <div id="posts-container">
+            <p class="feed-loading">carregando logs...</p>
+          </div>
+
+          <div class="feed-pagination" id="feed-pagination"></div>
+        </div>
+      </main>
+
+      <footer>
+        <span>Play VA-11 Hall-A</span>
+        <div class="footer-links">
+          <a href="/sobre.html" class="footer-link">sobre</a>
+          <a href="/contato.html" class="footer-link">contato</a>
+        </div>
+        <span>Made by Angee</span>
+      </footer>
+    </div>
+    <script src="./js/home.js"></script>
+  </body>
+</html>

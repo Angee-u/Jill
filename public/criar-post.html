@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JILL-11.BAR — Novo Log</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/criar-post.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">JILL-11<span>.BAR</span></div>
+        <nav class="main-nav">
+          <a href="/home.html" class="nav-link">home</a>
+          <a href="/sobre.html" class="nav-link">sobre</a>
+          <a href="/contato.html" class="nav-link">contato</a>
+        </nav>
+        <div class="header-right">
+          <a href="/login.html" class="header-user" id="header-auth"
+            >[ entrar ]</a
+          >
+        </div>
+      </header>
+
+      <main class="main-form-content">
+        <div class="form-container">
+          <h1 class="form-title">> TRANSMIT_NEW_LOG.EXE</h1>
+
+          <form id="form-criar-post">
+            <div class="va-error" id="msg-erro"></div>
+
+            <div class="va-group">
+              <label for="post-title">// identificação / título do log</label>
+              <input
+                type="text"
+                id="post-title"
+                class="va-input"
+                required
+                placeholder="Ex: Mais uma noite fria em Glitch City..."
+              />
+            </div>
+
+            <div class="va-group">
+              <label for="post-category">// indexar em / categoria</label>
+              <select id="post-category" class="va-select" required>
+                <option value="1">dia-a-dia</option>
+                <option value="2">tecnologia</option>
+                <option value="3">arte & música</option>
+                <option value="4">off-topic</option>
+              </select>
+            </div>
+
+            <div class="va-group">
+              <label for="spotify-search"
+                >// trilha sonora / buscar faixa no spotify</label
+              >
+              <div class="spotify-search-box">
+                <input
+                  type="text"
+                  id="spotify-search"
+                  class="va-input"
+                  placeholder="Digite o nome da música ou artista..."
+                />
+                <button
+                  type="button"
+                  id="btn-search-spotify"
+                  class="va-btn pink"
+                >
+                  > buscar
+                </button>
+              </div>
+
+              <div id="spotify-results" class="spotify-results-list"></div>
+
+              <input type="hidden" id="post-spotify" value="" />
+              <input type="hidden" id="post-spotify-track" value="" />
+            </div>
+
+            <div class="va-group">
+              <label for="post-content">// buffer de texto / conteúdo</label>
+              <textarea
+                id="post-content"
+                class="va-input"
+                rows="10"
+                required
+                placeholder="Escreva o relatório da noite ou os seus pensamentos profundos aqui..."
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="va-btn">> transmitir</button>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <footer>
+        <span>Play VA-11 Hall-A</span>
+        <div class="footer-links">
+          <a href="/sobre.html" class="footer-link">sobre</a>
+          <a href="/contato.html" class="footer-link">contato</a>
+        </div>
+        <span>Made by Angee</span>
+      </footer>
+    </div>
+
+    <script src="./js/criar-post.js"></script>
+  </body>
+</html>

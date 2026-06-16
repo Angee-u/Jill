@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JILL-11.BAR — Meus Posts</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/listagem.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="logo">JILL-11<span>.BAR</span></div>
+        <nav class="main-nav">
+          <a href="/home.html" class="nav-link">home</a>
+          <a href="/sobre.html" class="nav-link">sobre</a>
+          <a href="/contato.html" class="nav-link">contato</a>
+        </nav>
+        <div class="header-right">
+          <span class="header-user" id="header-username">carregando...</span>
+          <button
+            class="va-btn"
+            id="btn-logout"
+            style="width: auto; padding: 4px 10px; font-size: 1.2rem"
+          >
+            sair
+          </button>
+        </div>
+      </header>
+
+      <main class="listagem-layout">
+        <aside class="form-panel">
+          <div class="form-panel-header">
+            <p class="section-title" id="form-title">// novo post</p>
+          </div>
+
+          <form id="post-form">
+            <input type="hidden" id="post-id" value="" />
+
+            <div class="va-input-group">
+              <label for="post-title" class="va-label">título</label>
+              <input
+                type="text"
+                id="post-title"
+                class="va-input"
+                placeholder="título do post..."
+                required
+              />
+            </div>
+
+            <div class="va-input-group">
+              <label for="post-category" class="va-label">categoria</label>
+              <select id="post-category" class="va-input">
+                <option value="">sem categoria</option>
+                <option value="1">Dia a Dia</option>
+                <option value="2">Tecnologia</option>
+                <option value="3">Off-Topic</option>
+                <option value="4">Arte e Música</option>
+              </select>
+            </div>
+
+            <div class="va-input-group">
+              <label for="post-excerpt" class="va-label">resumo</label>
+              <input
+                type="text"
+                id="post-excerpt"
+                class="va-input"
+                placeholder="uma frase sobre o post..."
+              />
+            </div>
+
+            <div class="va-input-group">
+              <label for="post-content" class="va-label">conteúdo</label>
+              <textarea
+                id="post-content"
+                class="va-input"
+                rows="8"
+                placeholder="escreva aqui..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="va-input-group">
+              <label for="post-spotify" class="va-label"
+                >spotify (opcional)</label
+              >
+              <div class="spotify-search-wrap">
+                <input
+                  type="text"
+                  id="post-spotify-search"
+                  class="va-input"
+                  placeholder="buscar música..."
+                />
+                <button
+                  type="button"
+                  class="va-btn"
+                  id="btn-spotify-search"
+                  style="width: auto; padding: 6px 12px"
+                >
+                  buscar
+                </button>
+              </div>
+              <div id="spotify-results" class="spotify-results hide"></div>
+              <input type="hidden" id="post-spotify-url" value="" />
+              <div id="spotify-selected" class="spotify-selected hide"></div>
+            </div>
+
+            <div class="va-input-group">
+              <label class="va-label">status</label>
+              <div class="status-toggle">
+                <label class="status-opt">
+                  <input
+                    type="radio"
+                    name="post-status"
+                    value="published"
+                    checked
+                  />
+                  <span>publicar</span>
+                </label>
+                <label class="status-opt">
+                  <input type="radio" name="post-status" value="draft" />
+                  <span>rascunho</span>
+                </label>
+              </div>
+            </div>
+
+            <p class="va-error" id="form-error"></p>
+            <p class="va-success" id="form-success"></p>
+
+            <div class="form-actions">
+              <button type="submit" class="va-btn full" id="btn-submit">
+                salvar post
+              </button>
+              <button
+                type="button"
+                class="va-btn pink"
+                id="btn-cancel-edit"
+                style="display: none"
+              >
+                cancelar edição
+              </button>
+            </div>
+          </form>
+        </aside>
+
+        <div class="listagem-content">
+          <div class="listagem-header">
+            <p class="section-title">// meus posts</p>
+            <div class="listagem-filters">
+              <select
+                id="filter-status"
+                class="va-input"
+                style="width: auto; font-size: 1.2rem; padding: 3px 8px"
+              >
+                <option value="">todos</option>
+                <option value="published">publicados</option>
+                <option value="draft">rascunhos</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="posts-table-container">
+            <p class="feed-loading">carregando posts...</p>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <span>Play VA-11 Hall-A</span>
+        <div class="footer-links">
+          <a href="/sobre.html" class="footer-link">sobre</a>
+          <a href="/contato.html" class="footer-link">contato</a>
+        </div>
+        <span>Made by Angee</span>
+      </footer>
+    </div>
+
+    <div id="modal-delete" class="modal-overlay hide">
+      <div class="modal-box">
+        <p class="modal-title">deletar post?</p>
+        <p class="modal-sub">"essa ação não pode ser desfeita, choom."</p>
+        <div class="modal-actions">
+          <button class="va-btn pink" id="btn-confirm-delete">deletar</button>
+          <button class="va-btn" id="btn-cancel-delete">cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/auth.js"></script>
+    <script src="./js/listagem.js"></script>
+  </body>
+</html>

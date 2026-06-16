@@ -58,6 +58,22 @@
   padding: 1.4rem;
 }
 
+.sobre-card--purple {
+  border-top-color: var(--va-neon-purple);
+}
+
+.sobre-card--pink {
+  border-top-color: var(--va-neon-pink);
+}
+
+.sobre-card--teal {
+  border-top-color: var(--va-neon-teal);
+}
+
+.sobre-card--amber {
+  border-top-color: var(--va-neon-amber);
+}
+
 .sobre-card-title {
   font-family: var(--font-interface);
   font-size: 1.5rem;
@@ -100,4 +116,9 @@
   color: var(--va-text-muted);
   font-style: italic;
   line-height: 1.6;
+}
+
+.credits-link {
+  margin-top: 8px;
+  display: inline-block;
 }

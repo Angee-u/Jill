@@ -118,6 +118,130 @@ header {
   color: var(--va-retro-cream);
 }
 
+.btn-logout {
+  background: none;
+  border: none;
+  color: var(--va-neon-pink);
+  font-family: var(--font-interface);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-logout:hover {
+  color: var(--va-retro-cream);
+}
+
+.header-create {
+  font-family: var(--font-interface);
+  font-size: 1.4rem;
+  color: var(--va-neon-teal);
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.header-create:hover {
+  color: var(--va-retro-cream);
+}
+
+.va-btn--compact {
+  width: auto;
+  padding: 4px 10px;
+  font-size: 1.2rem;
+}
+
+.va-input--compact {
+  width: auto;
+  font-size: 1.2rem;
+  padding: 3px 8px;
+}
+
+.author-avatar--sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.4rem;
+}
+
+.author-avatar--lg {
+  width: 4rem;
+  height: 4rem;
+  font-size: 0.6rem;
+}
+
+.sidebar-section {
+  padding: 0 1.2rem 1rem;
+}
+
+.sidebar-title {
+  font-family: var(--font-interface);
+  font-size: 1.6rem;
+  color: var(--va-neon-pink);
+  padding-bottom: 6px;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--va-bg-rain);
+  letter-spacing: 0.05em;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--va-bg-rain);
+  margin: 0.4rem 1.2rem 1rem;
+}
+
+.sidebar-link {
+  display: block;
+  font-family: var(--font-interface);
+  font-size: 1.4rem;
+  color: var(--va-text-muted);
+  text-decoration: none;
+  padding: 5px 8px;
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  color: var(--va-retro-cream);
+  border-left-color: var(--va-neon-pink);
+  background: var(--va-bg-rain);
+}
+
+.sidebar-link--action {
+  margin-bottom: 8px;
+}
+
+.sidebar-link--danger {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.feed-loading,
+.feed-empty {
+  font-family: var(--font-interface);
+  font-size: 1.4rem;
+  color: var(--va-text-muted);
+  font-style: italic;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.spotify-results-msg {
+  padding: 8px 10px;
+  font-family: var(--font-interface);
+  font-size: 1.2rem;
+}
+
+.spotify-results-msg--muted {
+  color: var(--va-text-muted);
+}
+
+.spotify-results-msg--error {
+  color: var(--va-neon-pink);
+}
+
 footer {
   background: var(--va-bg-main);
   border-top: 1px solid var(--va-neon-purple);
@@ -223,6 +347,11 @@ textarea.va-input {
   width: 100%;
 }
 
+.va-select {
+  appearance: none;
+  cursor: pointer;
+}
+
 .va-btn-link {
   display: inline-block;
   background: var(--va-bg-rain);
@@ -244,16 +373,6 @@ textarea.va-input {
   color: var(--va-retro-cream);
 }
 
-.va-btn-link.pink {
-  border-color: var(--va-neon-pink);
-  color: var(--va-neon-pink);
-}
-
-.va-btn-link.pink:hover {
-  background: var(--va-neon-pink);
-  color: var(--va-bg-main);
-}
-
 /* CATEGORIAS */
 .post-tag {
   font-family: var(--font-interface);
@@ -263,21 +382,6 @@ textarea.va-input {
   letter-spacing: 0.05em;
 }
 
-.tag-vida {
-  color: var(--va-neon-pink);
-  border-color: hsla(330, 86%, 70%, 0.35);
-  background: hsla(330, 86%, 70%, 0.07);
-}
-.tag-tech {
-  color: var(--va-neon-teal);
-  border-color: hsla(172, 66%, 50%, 0.35);
-  background: hsla(172, 66%, 50%, 0.07);
-}
-.tag-bar {
-  color: var(--va-neon-amber);
-  border-color: hsla(43, 96%, 56%, 0.35);
-  background: hsla(43, 96%, 56%, 0.07);
-}
 .tag-other {
   color: var(--va-text-muted);
   border-color: hsla(269, 46%, 57%, 0.35);
@@ -307,6 +411,18 @@ textarea.va-input {
   font-family: var(--font-interface);
   font-size: 1.1rem;
   color: #1ed760;
+}
+
+.ambient-spotify {
+  margin-top: 6px;
+  border: 1px solid rgba(30, 215, 96, 0.2);
+  overflow: hidden;
+}
+
+.ambient-spotify iframe {
+  display: block;
+  width: 100%;
+  border: 0;
 }
 
 /* ICON - AVATAR */
@@ -394,34 +510,6 @@ textarea.va-input {
   border-bottom-color: var(--va-neon-pink);
 }
 
-.va-forget-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.2rem;
-}
-
-.va-remeber {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-interface);
-  font-size: 1.3rem;
-  color: var(--va-text-muted);
-  cursor: pointer;
-}
-
-.va-forgotPassword {
-  font-family: var(--font-interface);
-  font-size: 1.3rem;
-  color: var(--va-neon-teal);
-  text-decoration: none;
-}
-
-.va-forgotPassword:hover {
-  color: var(--va-retro-cream);
-}
-
 /* UTIL'S */
 .hide {
   display: none !important;
@@ -451,11 +539,4 @@ textarea.va-input {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.section-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--va-bg-rain);
 }

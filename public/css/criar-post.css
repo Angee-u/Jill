@@ -35,39 +35,6 @@
   color: var(--va-text-muted);
 }
 
-.va-input,
-.va-select {
-  width: 100%;
-  background: #090514;
-  border: 1px solid var(--va-bg-rain);
-  color: var(--va-text-main);
-  font-family: "Courier Prime", monospace;
-  padding: 12px;
-  font-size: 1.4rem;
-  border-radius: 0;
-  outline: none;
-  box-sizing: border-box;
-}
-
-.va-input:focus,
-.va-select:focus {
-  border-color: var(--va-neon-teal);
-}
-
-.va-select option {
-  background: #090514;
-  color: var(--va-text-main);
-}
-
-.va-error {
-  color: var(--va-neon-pink);
-  font-family: var(--font-interface);
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  min-height: 20px;
-  font-style: italic;
-}
-
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -95,7 +62,6 @@
   border: 1px solid var(--va-bg-rain);
 }
 
-/* Card de cada música encontrada */
 .spotify-track-card {
   display: flex;
   align-items: center;
@@ -120,20 +86,32 @@
   height: 40px;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
 }
 
 .spotify-track-info {
   display: flex;
   flex-direction: column;
   font-family: var(--font-interface);
+  min-width: 0;
 }
 
 .spotify-track-name {
   font-size: 1.3rem;
   color: var(--va-retro-cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .spotify-track-artist {
   font-size: 1.1rem;
   color: var(--va-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-results-list .spotify-results-msg {
+  padding: 10px;
 }

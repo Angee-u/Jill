@@ -3,7 +3,6 @@
 .listagem-layout {
   display: flex;
   flex: 1;
-  align-items: flex-start;
 }
 
 /* FORM */
@@ -329,13 +328,4 @@ select.va-input {
 .modal-actions .va-btn {
   width: auto;
   padding: 7px 2rem;
-}
-
-.feed-loading {
-  font-family: var(--font-interface);
-  font-size: 1.4rem;
-  color: var(--va-text-muted);
-  font-style: italic;
-  padding: 2rem 0;
-  text-align: center;
 }

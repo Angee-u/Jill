@@ -4,6 +4,7 @@
   display: flex;
   flex: 1;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .contato-main {
@@ -42,7 +43,7 @@
 
 /* SIDEBAR */
 .contato-sidebar {
-  width: 22rem;
+  min-width: 22rem;
   background: var(--va-bg-main);
   border-left: 1px solid var(--va-neon-purple);
   padding: 1.4rem 0;
@@ -50,42 +51,8 @@
   align-self: stretch;
 }
 
-.sidebar-section {
-  padding: 0 1.2rem 1rem;
-}
-
-.sidebar-title {
-  font-family: var(--font-interface);
-  font-size: 1.6rem;
-  color: var(--va-neon-pink);
-  padding-bottom: 6px;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--va-bg-rain);
-  letter-spacing: 0.05em;
-}
-
-.sidebar-divider {
-  height: 1px;
-  background: var(--va-bg-rain);
-  margin: 0.4rem 1.2rem 1rem;
-}
-
-.sidebar-link {
-  display: block;
-  font-family: var(--font-interface);
-  font-size: 1.4rem;
-  color: var(--va-text-muted);
-  text-decoration: none;
-  padding: 5px 8px;
-  border-left: 2px solid transparent;
-  transition: all 0.15s;
+.contato-sidebar .sidebar-link {
   margin-bottom: 2px;
-}
-
-.sidebar-link:hover {
-  color: var(--va-retro-cream);
-  border-left-color: var(--va-neon-pink);
-  background: var(--va-bg-rain);
 }
 
 /* INFOS DE CONTAOT */

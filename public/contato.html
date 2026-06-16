@@ -22,6 +22,7 @@
         </nav>
         <div class="header-right">
           <a href="/login.html" class="header-user" id="header-auth">[ entrar ]</a>
+          <button type="button" class="btn-logout hide" id="btn-logout">[ sair ]</button>
         </div>
       </header>
 
@@ -84,13 +85,7 @@
 
           <div class="sidebar-divider"></div>
 
-          <div class="sidebar-section">
-            <p class="sidebar-title">// tocando agora</p>
-            <div class="spotify-bar">
-              <span class="spotify-dot"></span>
-              <span class="spotify-track">Alien Shooter — Kira &amp; Dana</span>
-            </div>
-          </div>
+          <div class="sidebar-section" data-ambient-player></div>
 
           <div class="sidebar-divider"></div>
 
@@ -114,6 +109,10 @@
       </footer>
 
     </div>
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
     <script src="./js/auth.js"></script>
+    <script src="./js/ambient-player.js"></script>
+    <script src="./js/contato.js"></script>
   </body>
 </html>

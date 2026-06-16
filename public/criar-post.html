@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JILL-11.BAR — Novo Log</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/home.css" />
     <link rel="stylesheet" href="./css/criar-post.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +26,9 @@
           <a href="/login.html" class="header-user" id="header-auth"
             >[ entrar ]</a
           >
+          <button type="button" class="btn-logout hide" id="btn-logout">
+            [ sair ]
+          </button>
         </div>
       </header>
 
@@ -49,12 +51,22 @@
             </div>
 
             <div class="va-group">
+              <label for="post-excerpt">// resumo / preview do log</label>
+              <input
+                type="text"
+                id="post-excerpt"
+                class="va-input"
+                placeholder="Uma frase curta que aparece no feed..."
+              />
+            </div>
+
+            <div class="va-group">
               <label for="post-category">// indexar em / categoria</label>
-              <select id="post-category" class="va-select" required>
-                <option value="1">dia-a-dia</option>
+              <select id="post-category" class="va-input va-select" required>
+                <option value="1">dia a dia</option>
                 <option value="2">tecnologia</option>
-                <option value="3">arte & música</option>
-                <option value="4">off-topic</option>
+                <option value="3">off-topic</option>
+                <option value="4">arte &amp; música</option>
               </select>
             </div>
 
@@ -78,7 +90,7 @@
                 </button>
               </div>
 
-              <div id="spotify-results" class="spotify-results-list"></div>
+              <div id="spotify-results" class="spotify-results-list hide"></div>
 
               <input type="hidden" id="post-spotify" value="" />
               <input type="hidden" id="post-spotify-track" value="" />
@@ -96,7 +108,7 @@
             </div>
 
             <div class="form-actions">
-              <button type="submit" class="va-btn">> transmitir</button>
+              <button type="submit" class="va-btn" id="btn-submit-post">> transmitir</button>
             </div>
           </form>
         </div>
@@ -112,6 +124,10 @@
       </footer>
     </div>
 
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/spotify.js"></script>
     <script src="./js/criar-post.js"></script>
   </body>
 </html>

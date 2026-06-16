@@ -1,59 +1,20 @@
-const API = "http://localhost:3000";
-
-// pega o id do post da URL: /post.html?id=3
 const postId = new URLSearchParams(window.location.search).get("id");
 
 if (!postId) window.location.href = "/home.html";
 
-function getUser() {
-  const user = localStorage.getItem("user");
-  return user ? JSON.parse(user) : null;
-}
-
-function authHeader() {
-  const token = localStorage.getItem("token");
-  return token ? { Authorization: `Bearer ${token}` } : {};
-}
-
-function checkAuthHeader() {
-  const user = getUser();
-  const headerAuth = document.getElementById("header-auth");
-
-  if (user && headerAuth) {
-    headerAuth.innerHTML = `[ session: <span>${user.username}</span> ]`;
-    headerAuth.href = "#";
-    headerAuth.style.color = "#00ffcc";
-
-    headerAuth.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (confirm("Deseja encerrar a sessão no terminal?")) {
-        localStorage.clear();
-        window.location.reload();
-      }
-    });
-  }
-}
-
-function formatDate(dateStr) {
-  if (!dateStr) return "data desconhecida";
-  try {
-    return new Date(dateStr).toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } catch (e) {
-    return "data inválida";
-  }
+function extractSpotifyId(url) {
+  if (!url) return "";
+  const parts = url.split("/");
+  return parts[parts.length - 1].split("?")[0];
 }
 
 async function loadPost() {
   const container = document.getElementById("post-main");
 
   try {
-    const res = await fetch(`${API}/api/posts/${postId}`);
+    const res = await fetch(`${API}/api/posts/${postId}`, {
+      headers: authHeader(),
+    });
     const post = await res.json();
 
     if (!res.ok) {
@@ -65,30 +26,28 @@ async function loadPost() {
     document.title = `${postTitle} — JILL-11.BAR`;
 
     const username = post.username ? String(post.username) : "Anon_Bartender";
-    const initials = username.slice(0, 2).toUpperCase();
+    const initials = getInitials(username);
 
     document.getElementById("author-avatar").textContent = initials;
     document.getElementById("author-name").textContent = username;
     document.getElementById("author-bio").textContent =
       post.bio || "sem bio ainda.";
 
-    // VERIFICA DONO POST
     const user = getUser();
     const actionsContainer = document.getElementById("sidebar-actions");
 
     if (user && post && actionsContainer && user.id === post.user_id) {
       actionsContainer.innerHTML = `
-        <a href="/criar-post.html?edit=${post.id}" class="sidebar-link edit-mode" style="margin-bottom: 8px; display: block;">> editar_log.exe</a>
-        <button id="btn-deletar-log" class="sidebar-link del-mode" style="background: none; border: none; width: 100%; text-align: left; cursor: pointer; padding: 0; display: block; margin-bottom: 12px;">> deletar_log.exe</button>
+        <a href="/criar-post.html?edit=${post.id}" class="sidebar-link sidebar-link--action">> editar_log.exe</a>
+        <button type="button" id="btn-deletar-log" class="sidebar-link sidebar-link--action sidebar-link--danger">> deletar_log.exe</button>
       `;
 
-      // Evento de clique para deletar o registro
       document
         .getElementById("btn-deletar-log")
         .addEventListener("click", async () => {
           if (
             confirm(
-              "AVISO DE SEGURANÇA: Excluir este registro o apagará permanentemente do banco central do JILL-11.BAR. Confirmar comando?",
+              "AVISO: Excluir este registro o apagará permanentemente do banco central do JILL-11.BAR. Você confirma??",
             )
           ) {
             try {
@@ -116,7 +75,6 @@ async function loadPost() {
       ? String(post.category_name).toLowerCase()
       : "sem categoria";
 
-    // Spotify
     const spotifyHtml = post.spotify_url
       ? `<div class="post-spotify">
            <iframe
@@ -132,20 +90,20 @@ async function loadPost() {
       <div class="post-breadcrumb">
         <a href="/home.html">home</a>
         <span>/</span>
-        <span>${categoriaExibida}</span>
+        <span>${escapeHtml(categoriaExibida)}</span>
         <span>/</span>
-        <span>${postTitle}</span>
+        <span>${escapeHtml(postTitle)}</span>
       </div>
 
       <header class="post-header">
         <div class="post-meta">
-          <span class="post-tag tag-other">${categoriaExibida}</span>
+          <span class="post-tag tag-other">${escapeHtml(categoriaExibida)}</span>
           <span class="post-date">${formatDate(post.created_at)}</span>
         </div>
-        <h1 class="post-header-title">${postTitle}</h1>
+        <h1 class="post-header-title">${escapeHtml(postTitle)}</h1>
         <div class="post-header-author">
-          <div class="author-avatar" style="width:2rem;height:2rem;font-size:0.4rem;display:flex;align-items:center;justify-content:center;">${initials}</div>
-          <span>${username}</span>
+          <div class="author-avatar author-avatar--sm">${initials}</div>
+          <span>${escapeHtml(username)}</span>
         </div>
       </header>
 
@@ -156,7 +114,7 @@ async function loadPost() {
           post.content
             ? post.content
                 .split("\n")
-                .map((p) => (p.trim() ? `<p>${p}</p>` : ""))
+                .map((p) => (p.trim() ? `<p>${escapeHtml(p)}</p>` : ""))
                 .join("")
             : "<p>Sem conteúdo.</p>"
         }
@@ -164,11 +122,9 @@ async function loadPost() {
 
       <div class="post-divider"></div>
 
-      <section class="comments-section" id="comments-section">
-      </section>
+      <section class="comments-section" id="comments-section"></section>
     `;
 
-    checkAuthHeader();
     loadComments();
   } catch (err) {
     container.innerHTML = '<p class="feed-loading">erro ao carregar post.</p>';
@@ -176,14 +132,6 @@ async function loadPost() {
   }
 }
 
-// Dados pro Spotify
-function extractSpotifyId(url) {
-  if (!url) return "";
-  const parts = url.split("/");
-  return parts[parts.length - 1].split("?")[0];
-}
-
-// COMENTSS
 async function loadComments() {
   const section = document.getElementById("comments-section");
   const user = getUser();
@@ -191,17 +139,16 @@ async function loadComments() {
   try {
     const res = await fetch(`${API}/api/posts/${postId}/comments`);
     const data = await res.json();
-
     const comments = data.comments || (Array.isArray(data) ? data : []);
 
     const formHtml = user
       ? `<div class="comment-form-box">
            <p class="comment-form-title">// deixar um comentário</p>
            <div class="va-input-group">
-             <textarea id="new-comment" class="va-input" rows="3" placeholder="escreva aqui..." style="width:100%; background:var(--va-bg-main); border:1px solid var(--va-bg-rain); color:var(--va-text-main); font-family:var(--font-interface); padding:8px; resize:vertical;"></textarea>
+             <textarea id="new-comment" class="va-input" rows="3" placeholder="escreva aqui..."></textarea>
            </div>
            <div class="comment-form-actions">
-             <button class="va-btn" id="btn-comment-submit">comentar ></button>
+             <button type="button" class="va-btn" id="btn-comment-submit">comentar ></button>
            </div>
          </div>`
       : `<div class="comment-form-box">
@@ -216,35 +163,32 @@ async function loadComments() {
         : `<div class="comments-list">${comments.map((c) => buildCommentCard(c, user)).join("")}</div>`;
 
     section.innerHTML = `
-      <p class="section-title" style="font-family:var(--font-interface); font-size:1.6rem; color:var(--va-neon-pink); border-bottom:1px solid var(--va-bg-rain); padding-bottom:6px; margin-bottom:1rem;">// comentários</p>
+      <p class="section-title">// comentários</p>
       <p class="comments-count">${comments.length} comentário${comments.length !== 1 ? "s" : ""}</p>
       ${formHtml}
       ${listHtml}
     `;
 
-    // evento do botão de comentar
     const btnSubmit = document.getElementById("btn-comment-submit");
     if (btnSubmit) {
       btnSubmit.addEventListener("click", submitComment);
     }
 
-    // eventos de editar/deletar
     attachCommentEvents();
   } catch (err) {
     console.error(err);
   }
 }
 
-// CARD DE COMMENT
 function buildCommentCard(comment, user) {
   const isOwn = user && user.id === comment.user_id;
   const username = comment.username ? String(comment.username) : "Anon";
-  const initials = username.slice(0, 2).toUpperCase();
+  const initials = getInitials(username);
 
   const actions = isOwn
     ? `<div class="comment-actions">
-         <button class="comment-action-btn" data-id="${comment.id}" data-action="edit">editar</button>
-         <button class="comment-action-btn del" data-id="${comment.id}" data-action="delete">del</button>
+         <button type="button" class="comment-action-btn" data-id="${comment.id}" data-action="edit">editar</button>
+         <button type="button" class="comment-action-btn del" data-id="${comment.id}" data-action="delete">del</button>
        </div>`
     : "";
 
@@ -252,18 +196,17 @@ function buildCommentCard(comment, user) {
     <div class="comment-card ${isOwn ? "own" : ""}" id="comment-${comment.id}">
       <div class="comment-header">
         <div class="comment-author">
-          <div class="author-avatar" style="width:2rem;height:2rem;font-size:0.4rem;display:flex;align-items:center;justify-content:center;">${initials}</div>
-          <span class="author-name">${username}</span>
+          <div class="author-avatar author-avatar--sm">${initials}</div>
+          <span class="author-name">${escapeHtml(username)}</span>
           <span class="comment-date">${formatDate(comment.created_at)}</span>
         </div>
         ${actions}
       </div>
-      <p class="comment-content" id="comment-content-${comment.id}">${comment.content}</p>
+      <p class="comment-content" id="comment-content-${comment.id}">${escapeHtml(comment.content)}</p>
     </div>
   `;
 }
 
-// EDITAR / DELETAR
 function attachCommentEvents() {
   document.querySelectorAll(".comment-action-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -275,7 +218,6 @@ function attachCommentEvents() {
   });
 }
 
-// ADD COMMENT
 async function submitComment() {
   const textarea = document.getElementById("new-comment");
   const content = textarea.value.trim();
@@ -302,17 +244,16 @@ async function submitComment() {
   }
 }
 
-// EDITAR COMMENT
 function startEditComment(id) {
   const contentEl = document.getElementById(`comment-content-${id}`);
   const original = contentEl.textContent;
 
   contentEl.outerHTML = `
     <div class="comment-edit-form" id="edit-form-${id}">
-      <textarea class="va-input" id="edit-textarea-${id}" rows="3" style="width:100%; background:var(--va-bg-main); border:1px solid var(--va-bg-rain); color:var(--va-text-main); font-family:var(--font-interface); padding:8px; resize:vertical;">${original}</textarea>
+      <textarea class="va-input" id="edit-textarea-${id}" rows="3">${escapeHtml(original)}</textarea>
       <div class="comment-form-actions">
-        <button class="va-btn" data-id="${id}" data-action="save-edit" style="margin-right:6px;">salvar</button>
-        <button class="va-btn pink" data-id="${id}" data-action="cancel-edit">cancelar</button>
+        <button type="button" class="va-btn" data-id="${id}" data-action="save-edit">salvar</button>
+        <button type="button" class="va-btn pink" data-id="${id}" data-action="cancel-edit">cancelar</button>
       </div>
     </div>
   `;
@@ -354,14 +295,13 @@ async function saveEditComment(id, original) {
   }
 }
 
-// DELETAR COMMENT
 async function deleteComment(id) {
   if (!confirm("deletar comentário?")) return;
 
   try {
     const res = await fetch(`${API}/api/posts/${postId}/comments/${id}`, {
       method: "DELETE",
-      headers: { ...authHeader() },
+      headers: authHeader(),
     });
 
     if (!res.ok) {

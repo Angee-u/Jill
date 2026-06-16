@@ -2,8 +2,15 @@ const pool = require("../config/db");
 
 exports.createPost = async (req, res) => {
   try {
-    const { title, content, category_id, spotify_url, spotify_track } =
-      req.body;
+    const {
+      title,
+      content,
+      excerpt,
+      category_id,
+      spotify_url,
+      spotify_track,
+      status,
+    } = req.body;
     const user_id = req.user.id;
 
     if (!title || !content) {
@@ -12,22 +19,27 @@ exports.createPost = async (req, res) => {
         .json({ error: "Título e conteúdo são obrigatórios." });
     }
 
-    let excerpt =
-      content.length > 120 ? content.slice(0, 117) + "..." : content;
-    if (spotify_track) {
-      excerpt = spotify_track;
-    }
+    const finalExcerpt =
+      excerpt ||
+      (content.length > 120 ? content.slice(0, 117) + "..." : content);
+
+    const finalCategoryId =
+      !category_id || category_id === "null" || category_id === ""
+        ? null
+        : category_id;
 
     const [result] = await pool.query(
-      `INSERT INTO posts (title, content, excerpt, category_id, user_id, spotify_url, status)
-       VALUES (?, ?, ?, ?, ?, ?, 'published')`,
+      `INSERT INTO posts (title, content, excerpt, category_id, user_id, spotify_url, spotify_track, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         title,
         content,
-        excerpt,
-        category_id || null,
+        finalExcerpt,
+        finalCategoryId,
         user_id,
         spotify_url || null,
+        spotify_track || null,
+        status || "published",
       ],
     );
 
@@ -53,6 +65,7 @@ exports.getAllPosts = async (req, res) => {
         posts.title,
         posts.excerpt,
         posts.spotify_url,
+        posts.spotify_track,
         posts.status,
         posts.created_at,
         users.username,
@@ -78,10 +91,20 @@ exports.getAllPosts = async (req, res) => {
 
     const [posts] = await pool.query(query, params);
 
-    // Conta o total de posts para atualizar a paginação do feed
-    const [[{ total }]] = await pool.query(
-      'SELECT COUNT(*) AS total FROM posts WHERE status = "published"',
-    );
+    let countQuery = `
+      SELECT COUNT(*) AS total
+      FROM posts
+      LEFT JOIN categories ON posts.category_id = categories.id
+      WHERE posts.status = 'published'
+    `;
+    const countParams = [];
+
+    if (category) {
+      countQuery += " AND categories.slug = ?";
+      countParams.push(category);
+    }
+
+    const [[{ total }]] = await pool.query(countQuery, countParams);
 
     return res.json({
       posts,
@@ -98,6 +121,45 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
+exports.getMyPosts = async (req, res) => {
+  try {
+    const user_id = req.user.id;
+    const { status } = req.query;
+
+    let query = `
+      SELECT
+        posts.id,
+        posts.title,
+        posts.excerpt,
+        posts.content,
+        posts.spotify_url,
+        posts.spotify_track,
+        posts.status,
+        posts.created_at,
+        posts.category_id,
+        categories.name AS category_name
+      FROM posts
+      LEFT JOIN categories ON posts.category_id = categories.id
+      WHERE posts.user_id = ?
+    `;
+    const params = [user_id];
+
+    if (status) {
+      query += " AND posts.status = ?";
+      params.push(status);
+    }
+
+    query += " ORDER BY posts.created_at DESC";
+
+    const [posts] = await pool.query(query, params);
+
+    return res.json({ posts });
+  } catch (err) {
+    console.error("Erro no getMyPosts:", err);
+    return res.status(500).json({ error: "Erro ao buscar seus posts." });
+  }
+};
+
 exports.getPostById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -111,7 +173,7 @@ exports.getPostById = async (req, res) => {
        FROM posts
        JOIN users ON posts.user_id = users.id
        LEFT JOIN categories ON posts.category_id = categories.id
-       WHERE posts.id = ? AND posts.status = 'published'`,
+       WHERE posts.id = ?`,
       [id],
     );
 
@@ -119,7 +181,17 @@ exports.getPostById = async (req, res) => {
       return res.status(404).json({ error: "Post não encontrado no sistema." });
     }
 
-    return res.json(rows[0]);
+    const post = rows[0];
+
+    if (post.status !== "published") {
+      if (!req.user || req.user.id !== post.user_id) {
+        return res
+          .status(404)
+          .json({ error: "Post não encontrado no sistema." });
+      }
+    }
+
+    return res.json(post);
   } catch (err) {
     console.error("Erro no getPostById:", err);
     return res
@@ -134,12 +206,6 @@ exports.updatePost = async (req, res) => {
     const { title, content, category_id, spotify_url, spotify_track, status } =
       req.body;
     const user_id = req.user.id;
-
-    console.log("DADOS RECEBIDOS:", {
-      id: req.params.id,
-      cat_id: req.body.category_id,
-      type: typeof req.body.category_id,
-    });
 
     // Garante que category_id seja null se estiver vazio ou string vazia
     const finalCategoryId =
@@ -157,21 +223,23 @@ exports.updatePost = async (req, res) => {
         .status(404)
         .json({ error: "Post não encontrado ou sem permissão." });
 
-    let excerpt =
-      spotify_track ||
+    const { excerpt } = req.body;
+
+    let finalExcerpt =
+      excerpt ||
       (content.length > 120 ? content.slice(0, 117) + "..." : content);
 
-    // Query de atualização garantindo a ordem correta dos parâmetros
     await pool.query(
       `UPDATE posts 
-       SET title = ?, content = ?, excerpt = ?, category_id = ?, spotify_url = ?, status = ? 
+       SET title = ?, content = ?, excerpt = ?, category_id = ?, spotify_url = ?, spotify_track = ?, status = ? 
        WHERE id = ?`,
       [
         title,
         content,
-        excerpt,
+        finalExcerpt,
         finalCategoryId,
         spotify_url || null,
+        spotify_track || null,
         status || "published",
         id,
       ],

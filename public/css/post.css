@@ -1,21 +1,17 @@
-/* post.css — depende de style.css */
+/* DEPENDE STYLE.CSS */
 
-/* ── LAYOUT ── */
 .post-layout {
   display: flex;
   flex: 1;
-  align-items: flex-start;
   gap: 0;
 }
 
-/* ── CONTEÚDO PRINCIPAL ── */
 .post-main {
   flex: 1;
   padding: 2rem 2.4rem;
-  min-width: 0; /* evita overflow em flex */
+  min-width: 0; 
 }
 
-/* breadcrumb */
 .post-breadcrumb {
   font-family: var(--font-interface);
   font-size: 1.2rem;
@@ -35,7 +31,6 @@
   margin: 0 6px;
 }
 
-/* cabeçalho do post */
 .post-header {
   margin-bottom: 2rem;
 }
@@ -65,7 +60,6 @@
   color: var(--va-text-muted);
 }
 
-/* player do spotify */
 .post-spotify {
   margin: 1.6rem 0;
   border: 1px solid rgba(30, 215, 96, 0.2);
@@ -77,7 +71,6 @@
   width: 100%;
 }
 
-/* corpo do post */
 .post-body {
   font-size: 1.4rem;
   line-height: 1.9;
@@ -102,9 +95,15 @@
   margin: 2.4rem 0;
 }
 
-/* ── SEÇÃO DE COMENTÁRIOS ── */
 .comments-section {
   margin-top: 0;
+}
+
+.comments-section .section-title {
+  color: var(--va-neon-pink);
+  border-bottom: 1px solid var(--va-bg-rain);
+  padding-bottom: 6px;
+  margin-bottom: 1rem;
 }
 
 .comments-count {
@@ -228,6 +227,10 @@
   gap: 6px;
 }
 
+.comment-edit-form .va-btn + .va-btn {
+  margin-right: 6px;
+}
+
 .comments-empty {
   font-family: var(--font-interface);
   font-size: 1.3rem;
@@ -236,53 +239,14 @@
   padding: 1rem 0;
 }
 
-/* ── SIDEBAR DO POST ── */
 .post-sidebar {
-  width: 22rem;
+  width: 25rem;
   background: var(--va-bg-main);
   border-left: 1px solid var(--va-neon-purple);
   padding: 1.4rem 0;
   flex-shrink: 0;
 }
 
-.sidebar-section {
-  padding: 0 1.2rem 1rem;
-}
-
-.sidebar-title {
-  font-family: var(--font-interface);
-  font-size: 1.6rem;
-  color: var(--va-neon-pink);
-  padding-bottom: 6px;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--va-bg-rain);
-  letter-spacing: 0.05em;
-}
-
-.sidebar-divider {
-  height: 1px;
-  background: var(--va-bg-rain);
-  margin: 0.4rem 1.2rem 1rem;
-}
-
-.sidebar-link {
-  display: block;
-  font-family: var(--font-interface);
-  font-size: 1.4rem;
-  color: var(--va-text-muted);
-  text-decoration: none;
-  padding: 5px 8px;
-  border-left: 2px solid transparent;
-  transition: all 0.15s;
-}
-
-.sidebar-link:hover {
-  color: var(--va-retro-cream);
-  border-left-color: var(--va-neon-pink);
-  background: var(--va-bg-rain);
-}
-
-/* card do autor na sidebar */
 .author-card {
   display: flex;
   align-items: flex-start;

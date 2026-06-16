@@ -8,25 +8,31 @@
     <link rel="stylesheet" href="./css/post.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="page">
-
       <header>
         <div class="logo">JILL-11<span>.BAR</span></div>
         <nav class="main-nav">
-          <a href="/home.html"    class="nav-link">home</a>
-          <a href="/sobre.html"   class="nav-link">sobre</a>
+          <a href="/home.html" class="nav-link">home</a>
+          <a href="/sobre.html" class="nav-link">sobre</a>
           <a href="/contato.html" class="nav-link">contato</a>
         </nav>
         <div class="header-right">
-          <a href="/login.html" class="header-user" id="header-auth">[ entrar ]</a>
+          <a href="/login.html" class="header-user" id="header-auth"
+            >[ entrar ]</a
+          >
+          <button type="button" class="btn-logout hide" id="btn-logout">
+            [ sair ]
+          </button>
         </div>
       </header>
 
       <main class="post-layout">
-
         <div class="post-main" id="post-main">
           <p class="feed-loading">carregando post...</p>
         </div>
@@ -38,7 +44,7 @@
               <div class="author-avatar" id="author-avatar">--</div>
               <div>
                 <p class="author-card-name" id="author-name">--</p>
-                <p class="author-card-bio"  id="author-bio">carregando...</p>
+                <p class="author-card-bio" id="author-bio">carregando...</p>
               </div>
             </div>
           </div>
@@ -47,25 +53,26 @@
 
           <div class="sidebar-section">
             <p class="sidebar-title">// navegação</p>
-            
+
             <div id="sidebar-actions"></div>
-            
+
             <a href="/home.html" class="sidebar-link">&lt; voltar ao feed</a>
           </div>
         </aside>
-
       </main>
 
       <footer>
         <span>Play VA-11 Hall-A</span>
         <div class="footer-links">
-          <a href="/sobre.html"   class="footer-link">sobre</a>
+          <a href="/sobre.html" class="footer-link">sobre</a>
           <a href="/contato.html" class="footer-link">contato</a>
         </div>
         <span>Made by Angee</span>
       </footer>
-
     </div>
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/post.js"></script>
   </body>
 </html>

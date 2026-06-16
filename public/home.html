@@ -23,31 +23,19 @@
           <a href="/contato.html" class="nav-link">contato</a>
         </nav>
         <div class="header-right">
+          <a href="/criar-post.html" class="header-create hide" id="header-create"
+            >[ + criar log ]</a
+          >
           <a href="/login.html" class="header-user" id="header-auth"
             >[ entrar ]</a
           >
-          <button
-            id="btn-logout"
-            style="
-              display: block;
-              background: none;
-              border: none;
-              color: #ff3366;
-              cursor: pointer;
-            "
-          >
+          <button type="button" class="btn-logout hide" id="btn-logout">
             [ sair ]
           </button>
         </div>
       </header>
 
       <section class="hero">
-        <div class="hero-weather">
-          <span class="weather-city">Glitch City</span>
-          <span class="weather-sep">·</span>
-          <span class="weather-status">chuva · 18°C</span>
-        </div>
-
         <div class="hero-content">
           <p class="hero-eyebrow">// glitch city bulletin board</p>
           <h1 class="hero-title">JILL-11<span>.BAR</span></h1>
@@ -74,13 +62,20 @@
           <a href="#feed" class="va-btn-link">ler os logs &gt;</a>
         </div>
 
-        <div class="hero-panel">
-          <p class="panel-title">* JILL-11 *</p>
-          <p class="panel-sub">EST. 2031</p>
-          <div class="panel-divider"></div>
-          <p class="panel-label">// drink do dia</p>
-          <p class="panel-value">White Knight</p>
-          <p class="panel-drink-sub">vodka + licor de creme</p>
+        <div class="keep-right">
+          <div class="hero-weather">
+            <span class="weather-city">Glitch City</span>
+            <span class="weather-sep">·</span>
+            <span class="weather-status">chuva · 18°C</span>
+          </div>
+          <div class="hero-panel">
+            <p class="panel-title">* JILL-11 *</p>
+            <p class="panel-sub">EST. 2031</p>
+            <div class="panel-divider"></div>
+            <p class="panel-label">// drinks do dia</p>
+            <p class="panel-value">White Knight</p>
+            <p class="panel-drink-sub">vodka + licor de creme</p>
+          </div>
         </div>
       </section>
 
@@ -120,7 +115,7 @@
           <div class="sidebar-divider"></div>
 
           <div class="sidebar-section">
-            <p class="sidebar-title">// drink do dia</p>
+            <p class="sidebar-title">// drinks do dia</p>
             <div class="drink-card">
               <p class="drink-name">White Knight</p>
               <p class="drink-desc">
@@ -132,6 +127,10 @@
               <p class="drink-desc">sem álcool<br />p/ dirigir depois</p>
             </div>
           </div>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-section" data-ambient-player></div>
 
           <div class="sidebar-divider"></div>
 
@@ -180,6 +179,10 @@
         <span>Made by Angee</span>
       </footer>
     </div>
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/ambient-player.js"></script>
     <script src="./js/home.js"></script>
   </body>
 </html>

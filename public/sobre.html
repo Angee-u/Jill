@@ -26,6 +26,9 @@
           <a href="/login.html" class="header-user" id="header-auth"
             >[ entrar ]</a
           >
+          <button type="button" class="btn-logout hide" id="btn-logout">
+            [ sair ]
+          </button>
         </div>
       </header>
 
@@ -40,69 +43,51 @@
         </section>
 
         <section class="sobre-cards">
-          <div
-            class="sobre-card"
-            style="border-top-color: var(--va-neon-purple)"
-          >
+          <div class="sobre-card sobre-card--purple">
             <p class="sobre-card-title">// o que é isso</p>
             <p class="sobre-card-text">
-              Um blog coletivo inspirado no universo de VA-11 Hall-A. Um lugar
-              pra escrever sobre o dia a dia, tecnologia, arte e tudo que não
-              cabe em outras redes. Sem algoritmo. Ordem cronológica.
+              Um blog inspirado no jogo VA-11 Hall-A. Um lugar
+              pra escrever o que você quiser. Sinta-se livre.
             </p>
           </div>
 
-          <div class="sobre-card" style="border-top-color: var(--va-neon-pink)">
+          <div class="sobre-card sobre-card--pink">
             <p class="sobre-card-title">// como funciona</p>
             <p class="sobre-card-text">
-              Crie uma conta, escreva seus posts e opcionalmente adicione uma
-              trilha sonora do Spotify. Outros usuários podem ler e comentar.
-              Simples assim.
+              Crie uma conta, escreva seus posts e se quiser adicione uma música do seu gosto usando o Spotify. Outros usuários podem ler e comentar. Apenas isso.
             </p>
           </div>
 
-          <div class="sobre-card" style="border-top-color: var(--va-neon-teal)">
+          <div class="sobre-card sobre-card--teal">
             <p class="sobre-card-title">// stack</p>
             <p class="sobre-card-text">
-              Frontend em HTML, CSS e JS puro.<br />
+              Frontend em HTML, CSS e JS.<br />
               Backend em Node.js com Express.<br />
               Banco de dados MySQL.<br />
               Música via Spotify Web API.
             </p>
           </div>
 
-          <div
-            class="sobre-card"
-            style="border-top-color: var(--va-neon-amber)"
-          >
+          <div class="sobre-card sobre-card--amber">
             <p class="sobre-card-title">// inspiração</p>
             <p class="sobre-card-text">
               VA-11 Hall-A: Cyberpunk Bartender Action (Sukeban Games, 2016).
-              Blogs pessoais dos anos 2000. Diários de madrugada. A vontade de
-              ter um lugar só nosso na internet.
+              Blogs pessoais na internet, principalmente pessoais.
+              A vontade de ter um lugar quieto.
             </p>
           </div>
         </section>
 
-        <!-- CRÉDITOS -->
         <section class="sobre-credits">
           <p class="section-title">// feito por</p>
           <div class="credits-card">
-            <div
-              class="author-avatar"
-              style="width: 4rem; height: 4rem; font-size: 0.6rem"
-            >
-              AN
-            </div>
+            <div class="author-avatar author-avatar--lg">AN</div>
             <div>
               <p class="credits-name">Angee</p>
               <p class="credits-desc">
-                estudante de ADS · desenvolvedor frontend · fã do VA-11
+                estudante de ADS · ainda não sei no que especializar · fã de VA-11
               </p>
-              <a
-                href="/contato.html"
-                class="va-btn-link"
-                style="margin-top: 8px; display: inline-block"
+              <a href="/contato.html" class="va-btn-link credits-link"
                 >falar comigo &gt;</a
               >
             </div>
@@ -119,6 +104,7 @@
         <span>Made by Angee</span>
       </footer>
     </div>
+    <script src="./js/config.js"></script>
     <script src="./js/auth.js"></script>
   </body>
 </html>

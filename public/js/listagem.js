@@ -1,40 +1,26 @@
-// listagem.js
-const API = "http://localhost:3000";
-
-// redireciona se não estiver logado
-if (!isLoggedIn()) window.location.href = "/login.html";
-
-const user = getUser();
-if (user) {
-  document.getElementById("header-username").textContent =
-    `[ ${user.username} ]`;
+if (!requireAuth()) {
+  throw new Error("auth required");
 }
 
-document.getElementById("btn-logout").addEventListener("click", logout);
+let editingId = null;
+let deleteTargetId = null;
 
-// ESTADO
-let editingId = null; // id do post sendo editado (null = criando novo)
-let deleteTargetId = null; // id do post aguardando confirmação de delete
+const spotifySearch = initSpotifySearch({
+  inputId: "post-spotify-search",
+  buttonId: "btn-spotify-search",
+  resultsId: "spotify-results",
+  hiddenUrlId: "post-spotify-url",
+  selectedId: "spotify-selected",
+  trackHiddenId: "post-spotify-track",
+});
 
-// FORMATA DATA
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
-// CARREGA POSTS DO USUÁRIO
 async function loadMyPosts() {
   const container = document.getElementById("posts-table-container");
   const filterStatus = document.getElementById("filter-status").value;
 
   container.innerHTML = '<p class="feed-loading">carregando posts...</p>';
 
-  let url = `${API}/api/posts/mine`; // rota que retorna só os posts do usuário logado
+  let url = `${API}/api/posts/mine`;
   if (filterStatus) url += `?status=${filterStatus}`;
 
   try {
@@ -72,9 +58,9 @@ async function loadMyPosts() {
               (post, i) => `
             <tr>
               <td class="td-num">${String(i + 1).padStart(3, "0")}</td>
-              <td class="td-title" title="${post.title}">${post.title}</td>
-              <td><span class="post-tag tag-other">${post.category_name || "—"}</span></td>
-              <td>${formatDate(post.created_at)}</td>
+              <td class="td-title" title="${escapeHtml(post.title)}">${escapeHtml(post.title)}</td>
+              <td><span class="post-tag tag-other">${escapeHtml(post.category_name || "—")}</span></td>
+              <td>${formatDate(post.created_at, "short")}</td>
               <td>
                 <span class="${post.status === "published" ? "badge-pub" : "badge-draft"}">
                   ${post.status === "published" ? "pub" : "draft"}
@@ -92,7 +78,6 @@ async function loadMyPosts() {
       </table>
     `;
 
-    // eventos dos botões da tabela
     document.querySelectorAll(".tbl-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = Number(btn.dataset.id);
@@ -109,7 +94,6 @@ async function loadMyPosts() {
   }
 }
 
-// PREENCHE O FORM PARA EDIÇÃO
 function fillForm(post) {
   editingId = post.id;
 
@@ -119,25 +103,20 @@ function fillForm(post) {
   document.getElementById("post-content").value = post.content;
   document.getElementById("post-category").value = post.category_id || "";
   document.getElementById("post-spotify-url").value = post.spotify_url || "";
+  document.getElementById("post-spotify-track").value = post.spotify_track || "";
 
-  // status
   document.querySelector(
     `input[name="post-status"][value="${post.status}"]`,
   ).checked = true;
 
-  // spotify selecionado
   if (post.spotify_url) {
-    const selectedEl = document.getElementById("spotify-selected");
-    selectedEl.classList.remove("hide");
-    selectedEl.querySelector(".spotify-selected-name").textContent =
-      post.spotify_url;
+    spotifySearch.showSelected(post.spotify_track || "faixa selecionada");
   }
 
   document.getElementById("form-title").textContent = "// editar post";
   document.getElementById("btn-submit").textContent = "salvar alterações";
-  document.getElementById("btn-cancel-edit").style.display = "block";
+  document.getElementById("btn-cancel-edit").classList.remove("hide");
 
-  // sobe até o form
   document
     .querySelector(".form-panel")
     .scrollTo({ top: 0, behavior: "smooth" });
@@ -145,18 +124,19 @@ function fillForm(post) {
   clearFormMessages();
 }
 
-// LIMPA O FORM
 function resetForm() {
   editingId = null;
 
   document.getElementById("post-form").reset();
   document.getElementById("post-id").value = "";
   document.getElementById("post-spotify-url").value = "";
+  document.getElementById("post-spotify-track").value = "";
   document.getElementById("spotify-selected").classList.add("hide");
+  document.getElementById("spotify-selected").innerHTML = "";
   document.getElementById("spotify-results").classList.add("hide");
   document.getElementById("form-title").textContent = "// novo post";
   document.getElementById("btn-submit").textContent = "salvar post";
-  document.getElementById("btn-cancel-edit").style.display = "none";
+  document.getElementById("btn-cancel-edit").classList.add("hide");
 
   clearFormMessages();
 }
@@ -168,7 +148,6 @@ function clearFormMessages() {
 
 document.getElementById("btn-cancel-edit").addEventListener("click", resetForm);
 
-// SUBMIT DO FORM (criar ou editar)
 document.getElementById("post-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -181,6 +160,8 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
   const excerpt = document.getElementById("post-excerpt").value.trim();
   const categoryId = document.getElementById("post-category").value || null;
   const spotifyUrl = document.getElementById("post-spotify-url").value || null;
+  const spotifyTrack =
+    document.getElementById("post-spotify-track").value || null;
   const status = document.querySelector(
     'input[name="post-status"]:checked',
   ).value;
@@ -196,6 +177,7 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
     excerpt,
     category_id: categoryId,
     spotify_url: spotifyUrl,
+    spotify_track: spotifyTrack,
     status,
   };
 
@@ -227,12 +209,10 @@ document.getElementById("post-form").addEventListener("submit", async (e) => {
   }
 });
 
-// FILTRO DE STATUS
 document
   .getElementById("filter-status")
   .addEventListener("change", loadMyPosts);
 
-// MODAL DE DELETE
 function openDeleteModal(id) {
   deleteTargetId = id;
   document.getElementById("modal-delete").classList.remove("hide");
@@ -271,95 +251,8 @@ document
     }
   });
 
-// fecha modal clicando fora
 document.getElementById("modal-delete").addEventListener("click", (e) => {
   if (e.target === e.currentTarget) closeDeleteModal();
 });
-
-// SPOTIFY SEARCH
-document
-  .getElementById("btn-spotify-search")
-  .addEventListener("click", searchSpotify);
-
-document
-  .getElementById("post-spotify-search")
-  .addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      searchSpotify();
-    }
-  });
-
-async function searchSpotify() {
-  const q = document.getElementById("post-spotify-search").value.trim();
-  const resultsEl = document.getElementById("spotify-results");
-
-  if (!q) return;
-
-  resultsEl.classList.remove("hide");
-  resultsEl.innerHTML =
-    '<p style="padding:8px 10px;font-family:var(--font-interface);font-size:1.2rem;color:var(--va-text-muted);">buscando...</p>';
-
-  try {
-    const res = await fetch(
-      `${API}/api/spotify/search?q=${encodeURIComponent(q)}`,
-      {
-        headers: authHeader(),
-      },
-    );
-    const data = await res.json();
-
-    if (!res.ok || !data.tracks || data.tracks.length === 0) {
-      resultsEl.innerHTML =
-        '<p style="padding:8px 10px;font-family:var(--font-interface);font-size:1.2rem;color:var(--va-text-muted);">nenhum resultado.</p>';
-      return;
-    }
-
-    resultsEl.innerHTML = data.tracks
-      .map(
-        (track) => `
-      <div class="spotify-result-item" data-url="${track.spotify_url}" data-name="${track.name} — ${track.artist}">
-        ${track.cover ? `<img class="spotify-result-cover" src="${track.cover}" alt="${track.name}" />` : ""}
-        <div class="spotify-result-info">
-          <p class="spotify-result-name">${track.name}</p>
-          <p class="spotify-result-artist">${track.artist}</p>
-        </div>
-      </div>
-    `,
-      )
-      .join("");
-
-    resultsEl.querySelectorAll(".spotify-result-item").forEach((item) => {
-      item.addEventListener("click", () =>
-        selectTrack(item.dataset.url, item.dataset.name),
-      );
-    });
-  } catch (err) {
-    resultsEl.innerHTML =
-      '<p style="padding:8px 10px;font-size:1.2rem;color:var(--va-neon-pink);">erro ao buscar.</p>';
-    console.error(err);
-  }
-}
-
-function selectTrack(url, name) {
-  document.getElementById("post-spotify-url").value = url;
-
-  const selectedEl = document.getElementById("spotify-selected");
-  selectedEl.classList.remove("hide");
-  selectedEl.innerHTML = `
-    <span class="spotify-dot" style="width:5px;height:5px;background:#1ED760;border-radius:50%;flex-shrink:0;"></span>
-    <span class="spotify-selected-name">${name}</span>
-    <button class="spotify-clear" id="btn-clear-spotify">✕</button>
-  `;
-
-  document.getElementById("btn-clear-spotify").addEventListener("click", () => {
-    document.getElementById("post-spotify-url").value = "";
-    selectedEl.classList.add("hide");
-    selectedEl.innerHTML = "";
-  });
-
-  document.getElementById("spotify-results").classList.add("hide");
-  document.getElementById("post-spotify-search").value = "";
-}
 
 loadMyPosts();

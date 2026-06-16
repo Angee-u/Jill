@@ -23,13 +23,9 @@
           <a href="/contato.html" class="nav-link">contato</a>
         </nav>
         <div class="header-right">
-          <span class="header-user" id="header-username">carregando...</span>
-          <button
-            class="va-btn"
-            id="btn-logout"
-            style="width: auto; padding: 4px 10px; font-size: 1.2rem"
-          >
-            sair
+          <span class="header-user" id="header-username"></span>
+          <button type="button" class="btn-logout hide" id="btn-logout">
+            [ sair ]
           </button>
         </div>
       </header>
@@ -99,15 +95,15 @@
                 />
                 <button
                   type="button"
-                  class="va-btn"
+                  class="va-btn va-btn--compact"
                   id="btn-spotify-search"
-                  style="width: auto; padding: 6px 12px"
                 >
                   buscar
                 </button>
               </div>
               <div id="spotify-results" class="spotify-results hide"></div>
               <input type="hidden" id="post-spotify-url" value="" />
+              <input type="hidden" id="post-spotify-track" value="" />
               <div id="spotify-selected" class="spotify-selected hide"></div>
             </div>
 
@@ -139,9 +135,8 @@
               </button>
               <button
                 type="button"
-                class="va-btn pink"
+                class="va-btn pink hide"
                 id="btn-cancel-edit"
-                style="display: none"
               >
                 cancelar edição
               </button>
@@ -153,11 +148,7 @@
           <div class="listagem-header">
             <p class="section-title">// meus posts</p>
             <div class="listagem-filters">
-              <select
-                id="filter-status"
-                class="va-input"
-                style="width: auto; font-size: 1.2rem; padding: 3px 8px"
-              >
+              <select id="filter-status" class="va-input va-input--compact">
                 <option value="">todos</option>
                 <option value="published">publicados</option>
                 <option value="draft">rascunhos</option>
@@ -192,7 +183,10 @@
       </div>
     </div>
 
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
     <script src="./js/auth.js"></script>
+    <script src="./js/spotify.js"></script>
     <script src="./js/listagem.js"></script>
   </body>
 </html>
